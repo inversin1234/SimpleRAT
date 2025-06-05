@@ -1,0 +1,13 @@
+C:\Users\jorge\source\repos\RemoteAccessTool\RAT_Server\bin\Debug\RAT_Server.exe.config
+C:\Users\jorge\source\repos\RemoteAccessTool\RAT_Server\bin\Debug\RAT_Server.exe
+C:\Users\jorge\source\repos\RemoteAccessTool\RAT_Server\bin\Debug\RAT_Server.pdb
+C:\Users\jorge\source\repos\RemoteAccessTool\RAT_Server\obj\Debug\RAT_Server.csproj.AssemblyReference.cache
+C:\Users\jorge\source\repos\RemoteAccessTool\RAT_Server\obj\Debug\RAT_Server.Properties.Resources.resources
+C:\Users\jorge\source\repos\RemoteAccessTool\RAT_Server\obj\Debug\RAT_Server.ServerForm.resources
+C:\Users\jorge\source\repos\RemoteAccessTool\RAT_Server\obj\Debug\RAT_Server.csproj.GenerateResource.cache
+C:\Users\jorge\source\repos\RemoteAccessTool\RAT_Server\obj\Debug\RAT_Server.csproj.CoreCompileInputs.cache
+C:\Users\jorge\source\repos\RemoteAccessTool\RAT_Server\obj\Debug\RAT_Server.exe
+C:\Users\jorge\source\repos\RemoteAccessTool\RAT_Server\obj\Debug\RAT_Server.pdb
+C:\Users\jorge\source\repos\RemoteAccessTool\RAT_Server\obj\Debug\RAT_Server.RemoteDesktopForm.resources
+C:\Users\jorge\source\repos\RemoteAccessTool\RAT_Server\obj\Debug\RAT_Server.TaskManagerForm.resources
+C:\Users\jorge\source\repos\RemoteAccessTool\RAT_Server\obj\Debug\RAT_Server.BuilderForm.resources

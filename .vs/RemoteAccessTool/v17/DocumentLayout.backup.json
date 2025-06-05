@@ -1,0 +1,41 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\jorge\\source\\repos\\RemoteAccessTool\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{85401260-6D66-4250-A0C7-06F0331BDEE2}|RAT_Server\\RAT_Server.csproj|C:\\Users\\jorge\\source\\repos\\RemoteAccessTool\\rat_server\\taskmanagerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{85401260-6D66-4250-A0C7-06F0331BDEE2}|RAT_Server\\RAT_Server.csproj|solutionrelative:rat_server\\taskmanagerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TaskManagerForm.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\jorge\\source\\repos\\RemoteAccessTool\\RAT_Server\\TaskManagerForm.cs",
+              "RelativeDocumentMoniker": "RAT_Server\\TaskManagerForm.cs",
+              "ToolTip": "C:\\Users\\jorge\\source\\repos\\RemoteAccessTool\\RAT_Server\\TaskManagerForm.cs [Dise\u00F1o]",
+              "RelativeToolTip": "RAT_Server\\TaskManagerForm.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-07T18:58:31.935Z",
+              "IsPinned": true,
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Nuevo perfil",
+    "Projects": [
+      {
+        "Path": "RAT_Server\\RAT_Server.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "RAT_Client\\RAT_Client.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

@@ -15,6 +15,8 @@ This code base is intended for educational purposes only.
 - Clients send their PC name when connecting and can transmit screenshots when requested.
 - Browse, upload and download files on connected clients with the File Manager.
 
+
+
 ## Requirements
 
 - Windows with **.NET Framework 4.7.2** or later.
@@ -33,6 +35,8 @@ This code base is intended for educational purposes only.
 3. Execute the generated client on another machine. When it connects, its name appears in the client list.
 4. Right‑click a client entry and select **Ver Escritorio Remoto** to view its screen.
 5. Right‑click a client entry and choose **Administrador de Archivos** to manage files remotely.
+
+
 
 ## Directory Structure
 

